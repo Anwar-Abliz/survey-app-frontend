@@ -1,0 +1,244 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px; /* make container a bit wider */
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.header h1 {
+  margin: 0;
+  color: #4169e1;
+  font-size: 28px; /* slightly bigger title */
+}
+
+/* Upload Button */
+.upload-btn {
+  background-color: #4169e1;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.upload-btn:hover {
+  background-color: #3253c9;
+}
+
+/* Survey Table */
+.survey-container {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  overflow-x: auto; /* allow scroll if needed */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  font-size: 16px; /* bigger header font */
+}
+
+td {
+  font-size: 14px; /* smaller option text */
+}
+
+/* First column styling */
+.question-row td:first-child {
+  width: 300px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Thicker middle border between importance and satisfaction */
+th:nth-child(7),
+td:nth-child(7) {
+  border-left: 4px solid #aaa;
+}
+
+/* Importance Header and Satisfaction Header */
+.importance-header,
+.satisfaction-header {
+  color: #444;
+  font-size: 16px;
+}
+
+/* Text colors */
+.importance-text {
+  color: #ff6347;
+  font-weight: bold;
+}
+
+.satisfaction-text {
+  color: #ffa500;
+  font-weight: bold;
+}
+
+/* Radio Buttons */
+.radio-container {
+  display: inline-block;
+  position: relative;
+  height: 20px;
+  width: 20px;
+}
+
+.radio-container input {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+}
+
+/* Selected radio button styling */
+.radio-container input:checked + .checkmark {
+  background-color: #4169e1;
+  border-color: #4169e1;
+}
+
+.radio-container.importance-radio input:checked + .checkmark {
+  background-color: #ff6347;
+  border-color: #ff6347;
+}
+
+.radio-container.satisfaction-radio input:checked + .checkmark {
+  background-color: #ffa500;
+  border-color: #ffa500;
+}
+
+/* Buttons */
+.buttons-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.add-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background-color: #4169e1;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #3d9140;
+}
+
+.submit-btn:hover {
+  background-color: #3253c9;
+}
+
+/* Visualization section */
+.visualization-container {
+  padding: 20px;
+}
+
+.visualization-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.visualization-header h2 {
+  color: #4169e1;
+  font-size: 20px;
+  margin: 0;
+}
+
+.responses-box {
+  background-color: #f8f8f8;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.responses-box p {
+  margin: 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.responses-box span {
+  color: #4169e1;
+  font-size: 24px;
+  display: block;
+  text-align: center;
+}
+
+.chart-container {
+  height: 400px;
+  width: 100%;
+  position: relative;
+}
+
+.export-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-top: 15px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+}
+
+.export-btn:hover {
+  background-color: #3d9140;
+}
+
+/* File upload hidden */
+.file-upload {
+  display: none;
+}
