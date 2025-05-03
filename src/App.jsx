@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SurveyForm from './Components/SurveyForm';
 import SurveyChart from './Components/SurveyChart';
-import surveyService from './services/surveyService'; // ✅ fixed: default import
+import surveyService from './Services/surveyService'; // ✅ fixed: default import
 import './App.css';
 
 export default function App() {
