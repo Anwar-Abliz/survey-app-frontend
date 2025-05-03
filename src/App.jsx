@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import SurveyForm from './components/SurveyForm';
-import SurveyChart from './components/SurveyChart';
+import SurveyForm from './Components/SurveyForm';
+import SurveyChart from './Components/SurveyChart';
 import surveyService from './services/surveyService'; // ✅ fixed: default import
 import './App.css';
 
