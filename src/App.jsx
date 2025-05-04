@@ -12,10 +12,10 @@ export default function App() {
     try {
       const { data } = await surveyService.getResponses();
       setResponses(data);
-  
-      // Flatten all answer arrays
+
+      // Flatten array of response arrays
       const allAnswers = data.flat();
-  
+
       const grouped = {};
       allAnswers.forEach((answer) => {
         const key = answer.outcome;
@@ -25,7 +25,7 @@ export default function App() {
         grouped[key].imp.push(answer.importance);
         grouped[key].sat.push(answer.satisfaction);
       });
-  
+
       const formattedChartData = Object.values(grouped).map((entry) => {
         const impScore = entry.imp.filter(v => v >= 4).length / entry.imp.length || 0;
         const satScore = entry.sat.filter(v => v >= 4).length / entry.sat.length || 0;
@@ -36,12 +36,12 @@ export default function App() {
           .trim();
         return { outcome, impScore, satScore, oppScore };
       });
-  
+
       setChartData(formattedChartData);
     } catch (err) {
       console.error("Failed to load data:", err);
     }
-  }; 
+  };
 
   useEffect(() => {
     loadResponses();
