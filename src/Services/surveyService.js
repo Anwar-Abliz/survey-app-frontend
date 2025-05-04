@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://your-backend-url.onrender.com/api/responses'; // backend is hosted on render.com
+const API_URL = 'https://survey-app-backend-c2ft.onrender.com/api/responses'; // backend is hosted on render.com
 
 const surveyService = {
   getResponses: () => axios.get(API_URL),
