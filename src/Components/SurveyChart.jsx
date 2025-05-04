@@ -1,89 +1,96 @@
-import React, { useEffect, useRef } from 'react';
-import Chart from 'chart.js/auto';
-import './SurveyChart.css';
+import React, { useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
+import styles from './SurveyChart.module.css'; // ✅ new scoped module
 
-export default function SurveyChart({ responses }) {
+
+const SurveyChart = ({ chartData }) => {
   const chartRef = useRef(null);
   const chartInstanceRef = useRef(null);
 
   useEffect(() => {
-    const outcomes = {};
-    responses.flat().forEach(({ outcome, importance, satisfaction }) => {
-      if (!outcomes[outcome]) outcomes[outcome] = { imp: [], sat: [] };
-      outcomes[outcome].imp.push(importance);
-      outcomes[outcome].sat.push(satisfaction);
-    });
+    if (!chartData?.length) return;
 
-    const dataPoints = Object.entries(outcomes).map(([text, { imp, sat }]) => {
-      const impScore = imp.filter(x => x >= 4).length / imp.length;
-      const satScore = sat.filter(x => x >= 4).length / sat.length;
-      const oppScore = impScore + Math.max(0, impScore - satScore);
-      const cleanLabel = text.replace(/minimize (the time to |the likelihood that you cannot )/i, '');
-      return {
-        x: +(impScore * 10).toFixed(2),
-        y: +(satScore * 10).toFixed(2),
-        label: cleanLabel.trim(),
-        oppScore: +oppScore.toFixed(2)
-      };
-    });
-
-    if (chartInstanceRef.current) chartInstanceRef.current.destroy();
     const ctx = chartRef.current.getContext("2d");
 
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.destroy();
+    }
+
     chartInstanceRef.current = new Chart(ctx, {
-      type: 'scatter',
+      type: "scatter",
       data: {
-        datasets: [{
-          label: 'Opportunity Points',
-          data: dataPoints,
-          backgroundColor: 'rgba(100, 149, 237, 0.7)',
-          borderColor: '#4169e1',
-          pointRadius: 8,
-          pointHoverRadius: 10,
-        }]
+        datasets: chartData.map((point, index) => ({
+          label: point.outcome,
+          data: [{ x: point.impScore, y: point.satScore }],
+          backgroundColor: "rgba(75, 192, 192, 0.7)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          pointRadius: 6,
+          pointHoverRadius: 8,
+        })),
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false, // ✅ important for resizing
-        layout: {
-          padding: {
-            left: 20,
-            right: 20,
-            bottom: 30,
-            top: 10
-          }
-        },
+        maintainAspectRatio: false,
         plugins: {
           tooltip: {
             callbacks: {
-              label: ctx => `Opp: ${ctx.raw.oppScore}, Outcome: ${ctx.raw.label}`
-            }
+              label: function (context) {
+                const { x, y } = context.parsed;
+                const outcome = chartData[context.dataIndex].outcome;
+                const oppScore = chartData[context.dataIndex].oppScore;
+                return [
+                  `Outcome: ${outcome}`,
+                  `Imp: ${x.toFixed(2)} | Sat: ${y.toFixed(2)}`,
+                  `Opp: ${oppScore.toFixed(2)}`
+                ];
+              },
+            },
           },
           legend: {
-            display: false
-          }
+            display: false,
+          },
         },
         scales: {
           x: {
-            title: { display: true, text: 'Importance' },
+            title: {
+              display: true,
+              text: "Importance",
+              font: { size: 16 }
+            },
             min: 0,
-            max: 10,
-            ticks: { stepSize: 1 }
+            max: 1,
+            ticks: {
+              stepSize: 0.1,
+              font: { size: 13 }
+            },
           },
           y: {
-            title: { display: true, text: 'Satisfaction' },
+            title: {
+              display: true,
+              text: "Satisfaction",
+              font: { size: 16 }
+            },
             min: 0,
-            max: 10,
-            ticks: { stepSize: 1 }
-          }
-        }
-      }
+            max: 1,
+            ticks: {
+              stepSize: 0.1,
+              font: { size: 13 }
+            },
+          },
+        },
+      },
     });
-  }, [responses]);
+  }, [chartData]);
+
+  if (!chartData?.length) {
+    return <div className="chart-container">Loading chart data...</div>;
+  }
 
   return (
     <div className="chart-container">
-      <canvas ref={chartRef} />
+      <canvas ref={chartRef}></canvas>
     </div>
   );
-}
+};
+
+export default SurveyChart;

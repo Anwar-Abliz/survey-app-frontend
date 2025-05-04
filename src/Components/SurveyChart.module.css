@@ -1,0 +1,23 @@
+.sectionTitle {
+    font-size: 24px;
+    color: #4169e1;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .chartContainer {
+    padding: 1rem;
+    margin: 0 auto;
+    width: 95%;
+    max-width: 1000px;
+    height: 400px;
+    position: relative;
+  }
+  
+  @media (max-width: 768px) {
+    .chartContainer {
+      width: 100%;
+      padding: 0.5rem;
+    }
+  }
+  

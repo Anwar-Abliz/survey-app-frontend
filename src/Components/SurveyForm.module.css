@@ -1,0 +1,18 @@
+.sectionTitle {
+    font-size: 24px;
+    color: #4169e1;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .formSection {
+    font-size: 14px;
+    padding: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .formSection {
+      font-size: 12px;
+    }
+  }
+  

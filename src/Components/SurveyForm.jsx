@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import surveyService from '../Services/surveyService'; // ✅ fixed default import
-import './SurveyForm.css';
+import styles from './SurveyForm.module.css'; // ✅ new scoped module
 
 const questions = [
   "Minimize the time to understand the essential terms and concepts of AI",
