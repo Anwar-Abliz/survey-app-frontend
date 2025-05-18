@@ -4,7 +4,7 @@ import styles from './SurveyForm.module.css'; // ✅ new scoped module
 
 const questions = [
   "Minimize the time to understand the essential terms and concepts of AI",
-  "Minimize the likelihood that you cannot recall key terminology in your AI course"
+  "Minimize the time to apply the new knowledge to enhance my learning"
 ];
 
 const scale = [1, 2, 3, 4, 5];
@@ -51,7 +51,7 @@ export default function SurveyForm({ onSubmitSuccess }) {
               When learning AI knowledge, how <span className="importance-text">important</span> is it to you that you are able to:
             </th>
             <th colSpan={5} className="satisfaction-header">
-              When you are in LX AI Learning Session, how <span className="satisfaction-text">satisfied</span> are you with your ability to:
+              When using LX AI Learning Session, how <span className="satisfaction-text">satisfied</span> are you with your ability to:
             </th>
           </tr>
           <tr>

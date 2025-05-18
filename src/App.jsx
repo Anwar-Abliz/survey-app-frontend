@@ -4,6 +4,7 @@ import SurveyChart from './Components/SurveyChart';
 import surveyService from './Services/surveyService';
 import styles from './App.module.css';
 
+
 export default function App() {
   const [responses, setResponses] = useState([]);
   const [chartData, setChartData] = useState([]);
