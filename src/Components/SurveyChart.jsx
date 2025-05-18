@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import styles from './SurveyChart.module.css'; // ✅ new scoped module
-
+import styles from './SurveyChart.module.css';
 
 const SurveyChart = ({ chartData }) => {
   const chartRef = useRef(null);
@@ -31,6 +30,14 @@ const SurveyChart = ({ chartData }) => {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 30,
+            right: 20,
+            bottom: 20,
+            left: 20,
+          },
+        },
         plugins: {
           tooltip: {
             callbacks: {
@@ -83,11 +90,11 @@ const SurveyChart = ({ chartData }) => {
   }, [chartData]);
 
   if (!chartData?.length) {
-    return <div className="chart-container">Loading chart data...</div>;
+    return <div className={styles.chartContainer}>Loading chart data...</div>;
   }
 
   return (
-    <div className="chart-container">
+    <div className={styles.chartContainer}>
       <canvas ref={chartRef}></canvas>
     </div>
   );

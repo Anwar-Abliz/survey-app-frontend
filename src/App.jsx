@@ -4,7 +4,6 @@ import SurveyChart from './Components/SurveyChart';
 import surveyService from './Services/surveyService';
 import styles from './App.module.css';
 
-
 export default function App() {
   const [responses, setResponses] = useState([]);
   const [chartData, setChartData] = useState([]);
@@ -12,13 +11,17 @@ export default function App() {
   const loadResponses = async () => {
     try {
       const { data } = await surveyService.getResponses();
+      console.log("Fetched responses:", data);
       setResponses(data);
 
-      // Flatten array of response arrays
-      const allAnswers = data.flat();
+      const allAnswers = data;
+      const validAnswers = allAnswers.filter(
+        a => a.outcome && a.importance && a.satisfaction
+      );
+      console.log("Valid Answers:", validAnswers);
 
       const grouped = {};
-      allAnswers.forEach((answer) => {
+      validAnswers.forEach((answer) => {
         const key = answer.outcome;
         if (!grouped[key]) {
           grouped[key] = { question: key, imp: [], sat: [] };
@@ -32,12 +35,15 @@ export default function App() {
         const satScore = entry.sat.filter(v => v >= 4).length / entry.sat.length || 0;
         const oppScore = impScore + Math.max(0, impScore - satScore);
         const outcome = entry.question
-          .replace("Minimize the time to", "")
-          .replace("Minimize the likelihood that you cannot", "")
-          .trim();
+          ? entry.question
+              .replace("Minimize the time to", "")
+              .replace("Minimize the likelihood that you cannot", "")
+              .trim()
+          : "Unknown";
         return { outcome, impScore, satScore, oppScore };
       });
 
+      console.log("Formatted chart data:", formattedChartData);
       setChartData(formattedChartData);
     } catch (err) {
       console.error("Failed to load data:", err);
