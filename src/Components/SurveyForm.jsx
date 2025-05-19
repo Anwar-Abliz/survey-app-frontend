@@ -3,8 +3,8 @@ import surveyService from '../Services/surveyService'; // ✅ fixed default impo
 import styles from './SurveyForm.module.css'; // ✅ new scoped module
 
 const questions = [
-  "Minimize the time to understand the essential terms and concepts of AI",
-  "Minimize the time to apply the new knowledge to enhance my learning"
+  "Effortlessly assign tasks to team members",
+  "Facilitate smooth communication and collaboration among team members"
 ];
 
 const scale = [1, 2, 3, 4, 5];
@@ -48,10 +48,10 @@ export default function SurveyForm({ onSubmitSuccess }) {
           <tr>
             <th></th>
             <th colSpan={5} className="importance-header">
-              When learning AI knowledge, how <span className="importance-text">important</span> is it to you that you are able to:
+              When juggling multiple projects stressfully, how <span className="importance-text">important</span> is it to you that you are able to:
             </th>
             <th colSpan={5} className="satisfaction-header">
-              When using LX AI Learning Session, how <span className="satisfaction-text">satisfied</span> are you with your ability to:
+              When using Project Management Tool A, how <span className="satisfaction-text">satisfied</span> are you with your ability to:
             </th>
           </tr>
           <tr>
