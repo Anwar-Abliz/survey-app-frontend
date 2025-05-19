@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/responses';
+const API_URL = 'https://survey-app-frontend-nu.vercel.app/';
 
 const surveyService = {
   getResponses: () => axios.get(API_URL),
