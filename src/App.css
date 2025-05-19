@@ -152,36 +152,42 @@ td:nth-child(7) {
   margin-top: 15px;
 }
 
-.add-btn {
-  background-color: #4caf50;
+/* Admin Buttons: Add, Upload, Export */
+.add-btn,
+.upload-btn,
+.export-btn {
+  background-color: #4caf50;  /* green */
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.submit-btn {
-  background-color: #4169e1;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-btn:hover {
+.add-btn:hover,
+.upload-btn:hover,
+.export-btn:hover {
   background-color: #3d9140;
+}
+
+/* User Button: Submit */
+.submit-btn {
+  background-color: #4169e1;  /* blue */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .submit-btn:hover {
   background-color: #3253c9;
 }
 
-/* Visualization section */
-.visualization-container {
-  padding: 20px;
-}
 
 .visualization-header {
   display: flex;

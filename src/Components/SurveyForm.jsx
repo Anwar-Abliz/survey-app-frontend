@@ -88,8 +88,13 @@ export default function SurveyForm({ onSubmitSuccess }) {
           ))}
         </tbody>
       </table>
-      <div className="buttons-container">
-        <button className="submit-btn" onClick={handleSubmit}>Submit Response</button>
+      <div className="buttons-container" style={{ display: 'flex', justifyContent: 'space-between' }}>
+         <button className="add-btn" onClick={() => console.log("Add Outcome clicked")}>
+           Add Outcome
+         </button>
+         <button className="submit-btn" onClick={handleSubmit}>
+           Submit Response
+         </button>
       </div>
     </div>
   );

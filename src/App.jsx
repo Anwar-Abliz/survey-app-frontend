@@ -57,10 +57,15 @@ export default function App() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.sectionTitle}>Survey Questions</h2>
-      </div>
+       <h2 className={styles.sectionTitle}>Survey Questions</h2>
+       <button className="upload-btn" onClick={() => console.log("Upload clicked")}>
+         Upload Survey
+       </button>
+    </div>
+
 
       <SurveyForm onSubmitSuccess={loadResponses} />
+
 
       <div className={styles.visualizationContainer}>
         <div className={styles.visualizationHeader}>
@@ -72,6 +77,12 @@ export default function App() {
         </div>
 
         <SurveyChart chartData={chartData} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
+          <button className="export-btn" onClick={() => console.log("Export clicked")}>
+           Export Data
+          </button>
+        </div>
+
       </div>
     </div>
   );
