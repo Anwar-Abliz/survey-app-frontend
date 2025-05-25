@@ -18,14 +18,25 @@ const SurveyChart = ({ chartData }) => {
     chartInstanceRef.current = new Chart(ctx, {
       type: "scatter",
       data: {
-        datasets: chartData.map((point, index) => ({
-          label: point.outcome,
-          data: [{ x: point.impScore, y: point.satScore }],
-          backgroundColor: "rgba(75, 192, 192, 0.7)",
-          borderColor: "rgba(75, 192, 192, 1)",
-          pointRadius: 6,
-          pointHoverRadius: 8,
-        })),
+        datasets: [
+          {
+            label: "Diagonal Reference",
+            data: [{ x: 0, y: 0 }, { x: 1, y: 1 }],
+            borderColor: "rgba(75, 192, 192, 0.5)",
+            borderWidth: 1,
+            borderDash: [5, 5],
+            showLine: true,
+            pointRadius: 0,
+          },
+          ...chartData.map((point) => ({
+            label: point.outcome,
+            data: [{ x: point.impScore, y: point.satScore }],
+            backgroundColor: "rgba(75, 192, 192, 0.7)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            pointRadius: 6,
+            pointHoverRadius: 8,
+          })),
+        ],
       },
       options: {
         responsive: true,

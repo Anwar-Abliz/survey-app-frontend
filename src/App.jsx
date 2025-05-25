@@ -72,7 +72,7 @@ export default function App() {
           <h2 className={styles.sectionTitle}>Opportunity Landscape</h2>
           <div className={styles.responsesBox}>
             <p>Total Responses</p>
-            <span>{responses.length}</span>
+            <span>{Math.floor(responses.length / 2)}</span>
           </div>
         </div>
 
