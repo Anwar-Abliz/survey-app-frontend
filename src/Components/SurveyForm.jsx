@@ -3,8 +3,8 @@ import surveyService from '../Services/surveyService'; // ✅ fixed default impo
 import styles from './SurveyForm.module.css'; // ✅ new scoped module
 
 const questions = [
-  "Effortlessly assign tasks to team members",
-  "Facilitate smooth communication and collaboration among team members"
+  "Minimize the time to wait in food line",
+  "Minimize the time find a free table"
 ];
 
 const scale = [1, 2, 3, 4, 5];
@@ -48,10 +48,10 @@ export default function SurveyForm({ onSubmitSuccess }) {
           <tr>
             <th></th>
             <th colSpan={5} className="importance-header">
-              When juggling multiple projects stressfully, how <span className="importance-text">important</span> is it to you that you are able to:
+              When you are having lunch at company, how <span className="importance-text">important</span> is it to you that you can:
             </th>
             <th colSpan={5} className="satisfaction-header">
-              When using Project Management Tool A, how <span className="satisfaction-text">satisfied</span> are you with your ability to:
+              When eating at company canteen, how <span className="satisfaction-text">satisfied</span> are you with your ability to:
             </th>
           </tr>
           <tr>
