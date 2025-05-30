@@ -3,8 +3,8 @@ import surveyService from '../Services/surveyService'; // ✅ fixed default impo
 import styles from './SurveyForm.module.css'; // ✅ new scoped module
 
 const questions = [
-  "Minimize the time to wait in food line",
-  "Minimize the time find a free table"
+  "Understand key terms and concepts related to software/app development",
+  "Build your own software app (e.g., website, web app, Python app, BTP app)"
 ];
 
 const scale = [1, 2, 3, 4, 5];
@@ -48,16 +48,16 @@ export default function SurveyForm({ onSubmitSuccess }) {
           <tr>
             <th></th>
             <th colSpan={5} className="importance-header">
-              When you are having lunch at company, how <span className="importance-text">important</span> is it to you that you can:
+              In your work or personal life, how <span className="importance-text">important</span> is it to you to be able to:
             </th>
             <th colSpan={5} className="satisfaction-header">
-              When eating at company canteen, how <span className="satisfaction-text">satisfied</span> are you with your ability to:
+              When using AI tools, how <span className="satisfaction-text">confident</span> are you in your ability to:
             </th>
           </tr>
           <tr>
             <th></th>
             {scale.map(n => <th key={`imp-${n}`}>{['Not at all', 'Somewhat', 'Important', 'Very', 'Extremely'][n - 1]}<br />important</th>)}
-            {scale.map(n => <th key={`sat-${n}`}>{['Not at all', 'Somewhat', 'Satisfied', 'Very', 'Extremely'][n - 1]}<br />satisfied</th>)}
+            {scale.map(n => <th key={`sat-${n}`}>{['Not at all', 'Somewhat', 'Satisfied', 'Very', 'Extremely'][n - 1]}<br />confident</th>)}
           </tr>
         </thead>
         <tbody>
