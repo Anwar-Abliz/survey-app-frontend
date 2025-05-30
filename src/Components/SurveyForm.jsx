@@ -56,8 +56,8 @@ export default function SurveyForm({ onSubmitSuccess }) {
           </tr>
           <tr>
             <th></th>
-            {scale.map(n => <th key={`imp-${n}`}>{['Not at all', 'Somewhat', 'Important', 'Very', 'Extremely'][n - 1]}<br />important</th>)}
-            {scale.map(n => <th key={`sat-${n}`}>{['Not at all', 'Somewhat', 'Satisfied', 'Very', 'Extremely'][n - 1]}<br />confident</th>)}
+            {scale.map(n => <th key={`imp-${n}`}>{['Not at all', 'Somewhat', '', 'Very', 'Extremely'][n - 1]}<br />important</th>)}
+            {scale.map(n => <th key={`sat-${n}`}>{['Not at all', 'Somewhat', '', 'Very', 'Extremely'][n - 1]}<br />confident</th>)}
           </tr>
         </thead>
         <tbody>
