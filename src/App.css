@@ -31,13 +31,18 @@ body {
 
 /* Upload Button */
 .upload-btn {
-  background-color: #4169e1;
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+  display: inline-block;
+}
+
+.file-upload {
+  display: none;
 }
 
 .upload-btn:hover {

@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import surveyService from '../Services/surveyService'; // ✅ fixed default import
-import styles from './SurveyForm.module.css'; // ✅ new scoped module
-
-const questions = [
-  "Understand key terms and concepts related to software/app development",
-  "Build your own software app (e.g., website, web app, Python app, BTP app)"
-];
+import surveyService from '../Services/surveyService';
+import styles from './SurveyForm.module.css';
 
 const scale = [1, 2, 3, 4, 5];
 
-export default function SurveyForm({ onSubmitSuccess }) {
+export default function SurveyForm({ questions, circumstance, solution, onSubmitSuccess }) {
   const [formData, setFormData] = useState({});
 
   const handleChange = (qIndex, type, value) => {
@@ -33,7 +28,7 @@ export default function SurveyForm({ onSubmitSuccess }) {
       satisfaction: formData[idx]?.satisfaction
     }));
     try {
-      await surveyService.submitResponse(formatted); // ✅ now works
+      await surveyService.submitResponse(formatted);
       onSubmitSuccess();
       setFormData({});
     } catch (err) {
@@ -48,16 +43,16 @@ export default function SurveyForm({ onSubmitSuccess }) {
           <tr>
             <th></th>
             <th colSpan={5} className="importance-header">
-              In your work or personal life, how <span className="importance-text">important</span> is it to you to be able to:
+              When {circumstance}, how <span className="importance-text">important</span> is it to you to be able to:
             </th>
             <th colSpan={5} className="satisfaction-header">
-              When using AI tools, how <span className="satisfaction-text">confident</span> are you in your ability to:
+              When using {solution}, how <span className="satisfaction-text">satisfied</span> are you with your ability to:
             </th>
           </tr>
           <tr>
             <th></th>
-            {scale.map(n => <th key={`imp-${n}`}>{['Not at all', 'Somewhat', '', 'Very', 'Extremely'][n - 1]}<br />important</th>)}
-            {scale.map(n => <th key={`sat-${n}`}>{['Not at all', 'Somewhat', '', 'Very', 'Extremely'][n - 1]}<br />confident</th>)}
+            {scale.map(n => <th key={`imp-${n}`}>{['Not at all', 'Somewhat', 'Important', 'Very', 'Extremely'][n - 1]}<br />important</th>)}
+            {scale.map(n => <th key={`sat-${n}`}>{['Not at all', 'Somewhat', 'Satisfied', 'Very', 'Extremely'][n - 1]}<br />satisfied</th>)}
           </tr>
         </thead>
         <tbody>
@@ -88,13 +83,9 @@ export default function SurveyForm({ onSubmitSuccess }) {
           ))}
         </tbody>
       </table>
-      <div className="buttons-container" style={{ display: 'flex', justifyContent: 'space-between' }}>
-         <button className="add-btn" onClick={() => console.log("Add Outcome clicked")}>
-           Add Outcome
-         </button>
-         <button className="submit-btn" onClick={handleSubmit}>
-           Submit Response
-         </button>
+
+      <div className="buttons-container">
+        <button className="submit-btn" onClick={handleSubmit}>Submit Response</button>
       </div>
     </div>
   );

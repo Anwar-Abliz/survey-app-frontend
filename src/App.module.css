@@ -47,4 +47,16 @@
     align-items: center;
     margin-bottom: 1rem;
   }
-   
+.topicLine {
+  font-size: 18px;
+  color: #2c3e50;
+  margin: 0 0 10px 20px;
+  font-style: italic;
+}
+
+.sectionTitleSmall {
+  font-size: 20px;
+  color: #4169e1;
+  font-weight: 600;
+  margin: 1rem 0 1rem 20px;
+}
