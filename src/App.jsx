@@ -77,6 +77,10 @@ export default function App() {
     reader.readAsText(file);
   };
 
+  const handleAddOutcome = () => {
+    setQuestions(prev => [...prev, ""]);
+  };
+
   useEffect(() => {
     loadResponses();
   }, []);
@@ -99,6 +103,7 @@ export default function App() {
         questions={questions}
         circumstance={circumstance}
         solution={solution}
+        onAddOutcome={handleAddOutcome}
         onSubmitSuccess={loadResponses}
       />
 
