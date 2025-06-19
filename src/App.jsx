@@ -14,6 +14,8 @@ export default function App() {
   const [circumstance, setCircumstance] = useState("learning new AI knowledge");
   const [solution, setSolution] = useState("LX monthly AI learning sessions");
   const [topic, setTopic] = useState("To evaluate the need and expectation of the session participants");
+  const [showModal, setShowModal] = useState(false);
+  const [inputTopic, setInputTopic] = useState("");
 
   const loadResponses = async () => {
     try {
@@ -77,10 +79,6 @@ export default function App() {
     reader.readAsText(file);
   };
 
-  const handleAddOutcome = () => {
-    setQuestions(prev => [...prev, ""]);
-  };
-
   useEffect(() => {
     loadResponses();
   }, []);
@@ -89,6 +87,9 @@ export default function App() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h2 className={styles.sectionTitleSmall}>Survey Questions</h2>
+        <button className="generate-btn" onClick={() => setShowModal(true)}>
+          Generate Survey
+        </button>
         <label className="upload-btn">
           Upload Survey
           <input type="file" accept=".json" onChange={handleFileUpload} className="file-upload" />
@@ -103,7 +104,6 @@ export default function App() {
         questions={questions}
         circumstance={circumstance}
         solution={solution}
-        onAddOutcome={handleAddOutcome}
         onSubmitSuccess={loadResponses}
       />
 
@@ -124,6 +124,64 @@ export default function App() {
           </button>
         </div>
       </div>
+
+      {showModal && (
+        <div className={"modal"}>
+          <div className={"modalContent"}>
+            <h3>Generate Survey</h3>
+            <p>Click "Generate" to create a new survey with default questions.</p>
+            <label>Enter your survey topic:</label>
+            <input
+              type="text"
+              placeholder="Enter topic"
+              value={inputTopic}
+              onChange={(e) => setInputTopic(e.target.value)}
+              className="modal-input"
+            />
+            <button
+              className="submit-btn"
+              style={{ marginRight: '0.5rem' }}
+              onClick={async () => {
+                if (!inputTopic.trim()) return alert("Please enter a topic.");
+
+                try {
+                  const res = await fetch('http://localhost:5000/api/generate-survey', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic: inputTopic })
+                  });
+
+                  const data = await res.json();
+                  if (!data || !data.outcomes) {
+                    return alert("Invalid response from GPT.");
+                  }
+
+                  // Generate downloadable JSON
+                  const json = JSON.stringify(data, null, 2);
+                  const blob = new Blob([json], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.download = 'upload-survey.json';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+
+                  setShowModal(false);
+                  setInputTopic('');
+                } catch (err) {
+                  alert("GPT generation failed.");
+                  console.error(err);
+                }
+              }}
+            >
+              Generate
+            </button>
+
+            <button className="cancel-btn" onClick={() => setShowModal(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
