@@ -1,0 +1,86 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modalContent {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input area */
+.modalInput {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  resize: vertical;
+  overflow: auto;
+}
+
+/* Preview box */
+.previewBox {
+  background-color: #e6f0ff;
+  padding: 10px 14px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.previewLine {
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.previewSub {
+  font-weight: bold;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+/* Edit fields */
+.editBlock {
+  background-color: #f0eaff;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Dropdown */
+.modelDropdown {
+  width: 100%;
+  padding: 6px;
+  margin-top: 4px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+/* Textarea */
+.textarea {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+}

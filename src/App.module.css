@@ -1,57 +1,8 @@
 .sectionTitle {
-    font-size: 24px;
-    color: #4169e1;
-    font-weight: 600;
-    margin: 1rem 0 1rem 20px; /* top, right, bottom, left */
-  }
-  .visualizationHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .responsesBox {
-    background-color: #f8f8f8;
-    padding: 10px 15px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    text-align: center;
-    margin-left: auto;
-  }
-  
-  .responsesBox p {
-    margin: 0;
-    font-weight: bold;
-  }
-  
-  .responsesBox span {
-    color: #4169e1;
-    font-size: 24px;
-    display: block;
-  }
- /* Container layout fix */
-.container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #ffffff; /* brighter background */
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-  
-  /* Header layout */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-.topicLine {
-  font-size: 18px;
-  color: #2c3e50;
-  margin: 0 0 10px 20px;
-  font-style: italic;
+  font-size: 24px;
+  color: #4169e1;
+  font-weight: 600;
+  margin: 1rem 0 1rem 20px;
 }
 
 .sectionTitleSmall {
@@ -59,4 +10,74 @@
   color: #4169e1;
   font-weight: 600;
   margin: 1rem 0 1rem 20px;
+}
+
+.visualizationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.responsesBox {
+  background-color: #f8f8f8;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  text-align: center;
+  margin-left: auto;
+}
+
+.responsesBox p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.responsesBox span {
+  color: #4169e1;
+  font-size: 24px;
+  display: block;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.topicLine {
+  font-size: 18px;
+  color: #2c3e50;
+  margin: 0 0 10px 20px;
+  font-style: italic;
+}
+
+/* Shared Buttons */
+.submit-btn {
+  background-color: #4169e1;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: #aaa;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
 }
