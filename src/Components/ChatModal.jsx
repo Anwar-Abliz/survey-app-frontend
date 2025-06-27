@@ -37,14 +37,28 @@ export default function ChatModal({
     }
   };
 
-  const handleDeploy = () => {
+    const handleDeploy = async () => {
     if (!aiResult) return;
+
+    // Store generated data in DB
+    try {
+        await fetch("http://localhost:5000/api/generated-surveys", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(aiResult)
+        });
+    } catch (err) {
+        console.error("Failed to save generated survey:", err);
+    }
+
+    // Update UI
     setQuestions(aiResult.outcomes || []);
     setCircumstance(aiResult.circumstance || '');
     setSolution(aiResult.solution || '');
     setTopic(aiResult.topic || '');
     setShowModal(false);
-  };
+    };
+
 
   return (
     <div className={styles.modal}>

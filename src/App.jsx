@@ -67,30 +67,6 @@ export default function App() {
     }
   };
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const data = JSON.parse(event.target.result);
-        if (Array.isArray(data.outcomes)) {
-          setQuestions(data.outcomes);
-          setCircumstance(data.circumstance || "");
-          setSolution(data.solution || "");
-          setTopic(data.topic || "");
-          alert("Survey loaded successfully!");
-        } else {
-          alert("Invalid format: 'outcomes' array is missing.");
-        }
-      } catch (err) {
-        alert("Error reading file: " + err.message);
-      }
-    };
-    reader.readAsText(file);
-  };
-
   const handleSend = async () => {
     if (!userInput.trim()) return;
 
@@ -125,11 +101,11 @@ export default function App() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h2 className={styles.sectionTitleSmall}>Survey Questions</h2>
-        <button className="generate-btn" onClick={() => setShowModal(true)}>Generate Survey</button>
-        <label className="upload-btn">
-          Upload Survey
-          <input type="file" accept=".json" onChange={handleFileUpload} className="file-upload" />
-        </label>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '1rem' }}>
+          <button className="generate-btn" onClick={() => setShowModal(true)}>
+            <strong>AI Survey Builder</strong>
+          </button>
+        </div>
       </div>
 
       {topic && <p className={styles.topicLine}>{topic}</p>}
