@@ -84,3 +84,27 @@
   width: 100%;
   box-sizing: border-box;
 }
+.confirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.confirmActions button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.confirmActions .cancelBtn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.confirmActions .submitBtn {
+  background-color: #4169e1;
+  color: white;
+}

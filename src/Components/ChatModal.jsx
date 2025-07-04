@@ -6,12 +6,15 @@ export default function ChatModal({
   setQuestions,
   setCircumstance,
   setSolution,
-  setTopic
+  setTopic,
+  onSubmitSuccess
+
 }) {
   const [chatHistory, setChatHistory] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [aiResult, setAiResult] = useState(null);
   const [selectedModel, setSelectedModel] = useState('mistralai/mistral-7b-instruct');
+  const [showConfirmReset, setShowConfirmReset] = useState(false);
 
   const handleSend = async () => {
     if (!userInput.trim()) return;
@@ -37,27 +40,42 @@ export default function ChatModal({
     }
   };
 
-    const handleDeploy = async () => {
-    if (!aiResult) return;
+// Step 1: Trigger confirmation modal
+const handleDeploy = () => {
+  if (!aiResult) return;
+  setShowConfirmReset(true);
+};
 
-    // Store generated data in DB
-    try {
-        await fetch("http://localhost:5000/api/generated-surveys", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(aiResult)
-        });
-    } catch (err) {
-        console.error("Failed to save generated survey:", err);
-    }
+// Step 2: Run reset + deploy logic if confirmed
+const confirmDeploy = async () => {
+  try {
+    // 1. Save generated survey
+    await fetch("http://localhost:5000/api/generated-surveys", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(aiResult)
+    });
 
-    // Update UI
+    // 2. Reset previous responses
+    await fetch("http://localhost:5000/api/responses/reset", {
+      method: "POST"
+    });
+
+    // 3. Update UI state
     setQuestions(aiResult.outcomes || []);
-    setCircumstance(aiResult.circumstance || '');
-    setSolution(aiResult.solution || '');
-    setTopic(aiResult.topic || '');
+    setCircumstance(aiResult.circumstance || "");
+    setSolution(aiResult.solution || "");
+    setTopic(aiResult.topic || "");
+    setShowConfirmReset(false);
     setShowModal(false);
-    };
+
+    // ✅ 4. Refresh chart/response count *after* UI update
+    if (onSubmitSuccess) onSubmitSuccess();
+  } catch (err) {
+    console.error("Failed to reset responses:", err);
+  }
+};
+
 
 
   return (
@@ -154,6 +172,23 @@ export default function ChatModal({
             Close
           </button>
         )}
+        {showConfirmReset && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <h3>Confirm Reset</h3>
+              <p>This will delete all previous responses and reset the counter. Proceed?</p>
+              <div className={styles.confirmActions}>
+                <button className={`${styles.cancelBtn}`} onClick={() => setShowConfirmReset(false)}>
+                  Cancel
+                </button>
+                <button className={`${styles.submitBtn}`} onClick={confirmDeploy}>
+                  Confirm & Deploy
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

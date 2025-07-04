@@ -22,6 +22,9 @@ export default function App() {
   const [aiResult, setAiResult] = useState(null);
   const [selectedModel, setSelectedModel] = useState("mistralai/mistral-7b-instruct");
 
+  // Group responses by timestamp to count unique submissions
+const uniqueSubmissions = new Set(responses.map(r => r.timestamp)).size;
+
   const modelOptions = [
     { label: "Mistral 7B (Fast)", value: "mistralai/mistral-7b-instruct" },
     { label: "GPT-3.5", value: "openai/gpt-3.5-turbo" },
@@ -122,7 +125,7 @@ export default function App() {
           <h2 className={styles.sectionTitleSmall}>Opportunity Landscape</h2>
           <div className={styles.responsesBox}>
             <p>Total Responses</p>
-            <span>{Math.floor(responses.length / 2)}</span>
+            <span>{uniqueSubmissions}</span>
           </div>
         </div>
 
@@ -142,6 +145,7 @@ export default function App() {
           setCircumstance={setCircumstance}
           setSolution={setSolution}
           setTopic={setTopic}
+          onSubmitSuccess={loadResponses} 
         />
       )}
     </div>
